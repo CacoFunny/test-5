@@ -1,4 +1,10 @@
+"use client"; // nécessaire pour activer les hooks côté client
+import { useState } from "react";
+
 export default function Home() {
+  const [message, setMessage] = useState("Bienvenue sur mon application 🚀");
+  const [color, setColor] = useState("#2563eb"); // bleu par défaut (hex)
+
   return (
     <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-black">
       {/* Header */}
@@ -23,27 +29,29 @@ export default function Home() {
 
       {/* Contenu principal */}
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
-        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
-          Bienvenue sur mon application 🚀
+        <h2 className="text-4xl font-extrabold" style={{ color }}>
+          {message}
         </h2>
-        <p className="mt-4 max-w-xl text-lg text-gray-600 dark:text-gray-400">
-          Ceci est une page d’accueil Next.js personnalisée avec un vrai layout.
-          Tu peux maintenant ajouter des fonctionnalités, des pages et connecter
-          ton backend.
-        </p>
-        <div className="mt-8 flex gap-4">
-          <a
-            href="#"
-            className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700"
-          >
-            Commencer
-          </a>
-          <a
-            href="#"
-            className="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-          >
-            En savoir plus
-          </a>
+
+        {/* Champ pour modifier le texte */}
+        <input
+          type="text"
+          placeholder="Écris ton propre message..."
+          className="mt-6 rounded border px-4 py-2"
+          onChange={(e) => setMessage(e.target.value)}
+        />
+
+        {/* Sélecteur de couleur */}
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <label className="text-gray-700 dark:text-gray-300">
+            Choisis une couleur :
+          </label>
+          <input
+            type="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            className="h-10 w-20 cursor-pointer"
+          />
         </div>
       </main>
 
